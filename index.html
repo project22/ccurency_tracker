@@ -1,41 +1,51 @@
 <!DOCTYPE html>
 <html ng-app="CCurrencyApp">
   <head>
-    <title>CCurrency Reports</title>
+    <title>CryptoCurrency Reports</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/custom.css">
     <script src="https://code.jquery.com/jquery.js"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.10/angular.min.js"></script>
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
     <script src="/js/controllers.js"></script>
-    <link rel="stylesheet" href="/css/custom.css">
+    <script src="/js/ccurrency.js"></script>
   </head>
 <body ng-controller="CurrencyListCtrl">
   <nav class="navbar navbar-inverse navbar-static-top" role="navigation">
-    <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
-      <span class="navbar-brand" href="#"><span class="glyphicon glyphicon-stats"></span> CryptoCurrency Tracker</span>
+      <span class="navbar-brand" href="#"><span class="glyphicon glyphicon-stats"></span> CryptoCurrency Reports</span>
     </div>
-  </nav>
-
+  </nav> 
   <div class="container">
-    <div class="row">
-      <div class="col-md-4">
+    <div class="row">  
+      <div class="col-sm-6">
         <!--Sidebar content-->
-        Search: <input class="form-control" ng-model="query">
-        Sort by:
-        <select class="form-control" ng-model="orderProp">
-          <option value="name">Alphabetical</option>
-          <option value="id">ID</option>
-          <option value="-price_btc">Price BTC</option>
-          <option value="-volume_btc">Volume BTC</option>
-        </select>
-
+        <form class="form-inline" role="form">
+          <div class="form-group">
+            <div class="controls">
+              <input class="form-control" ng-model="query" placeholder="Search Currency">
+            </div>
+          </div>
+          <div class="form-group">
+          Sort by:
+            <select class="form-control" ng-model="orderProp">
+              <option value="name">Alphabetical</option>
+              <option value="id">ID</option>
+              <option value="-price_btc">Price BTC</option>
+              <option value="-volume_btc">Volume BTC</option>
+            </select>
+          </div>
+        </form>
       </div>
-      <div class="col-md-4">
+      <div class="col-sm-6 align-vert">
+        <span id="date">date</span>
+      </div>
+    </div>
+    <div class="row top-buffer">
+      <div class="col-md-12">
         <!--Body content-->
-
-        <table class="table">
+        <table class="table table-responsive">
           <tr>
             <th>Currency</th>
             <th>ID</td>
@@ -43,21 +53,16 @@
             <th>Volume BTC</td>
           </tr>
           <tr ng-repeat="currency in currencies | filter:query | orderBy:orderProp">
-            <td><a href = "{{currency.website}}" target="website">{{currency.name}}</a></td>
-            <td>{{currency.id}}</td>
-            <td>${{currency.price_btc}}</td>
-            <td>{{currency.volume_btc}}</td>
+            <td><strong>{{currency.name | limitTo:12}}<strong></td>
+            <td>{{currency.id }}</td>
+            <td>${{currency.price_btc | limitTo:10 }}</td>
+            <td>{{currency.volume_btc | limitTo:7}}</td>
           </tr>
         </table>
-
-      </div>
-      <div class="col-md-4 chart">
-        <div ng-repeat="currency in currencies | filter:query | orderBy:orderProp"  style="width: {{currency.price_btc *2}}px;">{{currency.price_btc }}</div>
       </div>
     </div>
   </div>
-
 </body>
 </html>
 
-<script src="js/d3.js"></script>
+
