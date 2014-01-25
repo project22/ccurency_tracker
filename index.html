@@ -4,12 +4,12 @@
     <title>CryptoCurrency Reports</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/css/custom.css">
+    <link rel="stylesheet" href="css/custom.css">
     <script src="https://code.jquery.com/jquery.js"></script>
-    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.10/angular.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.10/angular.min.js"></script>
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
-    <script src="/js/controllers.js"></script>
-    <script src="/js/ccurrency.js"></script>
+    <script src="js/controllers.js"></script>
+    <script src="js/ccurrency.js"></script>
   </head>
 <body ng-controller="CurrencyListCtrl">
   <nav class="navbar navbar-inverse navbar-static-top" role="navigation">
@@ -53,9 +53,9 @@
             <th>Volume BTC</td>
           </tr>
           <tr ng-repeat="currency in currencies | filter:query | orderBy:orderProp">
-            <td><strong>{{currency.name | limitTo:12}}<strong></td>
+            <td><strong>{{currency.name | limitTo:10}}<strong></td>
             <td>{{currency.id }}</td>
-            <td>${{currency.price_btc | limitTo:10 }}</td>
+            <td>${{currency.price_btc | limitTo:8 }}</td>
             <td>{{currency.volume_btc | limitTo:7}}</td>
           </tr>
         </table>
